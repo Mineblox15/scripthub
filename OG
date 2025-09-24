@@ -204,6 +204,12 @@ SubmitBtn.MouseButton1Click:Connect(function()
 		print("🔓 [SigmaZ Hub] Key accepted. Hub unlocked.")
 		KeyFrame:Destroy()
 		HubFrame.Visible = true
+		-- Print Game Info in Output
+		print("🎮 Game Name: " .. MarketplaceService:GetProductInfo(game.PlaceId).Name)
+		print("📌 Place Id: " .. game.PlaceId)
+		print("📝 Place Version: " .. game.PlaceVersion)
+		print("🆔 Job Id: " .. game.JobId)
+
 	else
 		print("❌ [SigmaZ Hub] Wrong key entered.")
 		KeyBox.Text = ""
