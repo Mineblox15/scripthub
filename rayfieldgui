@@ -1,6 +1,6 @@
 --// ✨ SigmaZ Hub fully RayField ✨
 
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/loader"))()
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/mainscript"))()
 
 local KEY_REQUIRED = "PHM-12345"
 local WorkingScript = {
