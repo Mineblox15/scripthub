@@ -1,11 +1,11 @@
---// ✨ Fancy Script Hub with Key System ✨
+--// ✨ SigmaZ Hub with Sidebar & Live Stats ✨
 
--- Services
 local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
 
---// CONFIG
-local KEY_REQUIRED = "PHM-12345" -- change this to your key
+local KEY_REQUIRED = "Password"
 local WorkingScript = {
 	{ Name = "Inf Yield", Url = "https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/scriptfile1" },
 	{ Name = "99 Nights", Url = "https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/99nights" },
@@ -14,24 +14,17 @@ local WorkingScript = {
 
 local player = Players.LocalPlayer
 
---// Loading Logs
-print("🔄 [Hub] Initializing...")
-task.wait(1)
-print("📡 [Hub] Fetching Game Data...")
-task.wait(1)
-print("✅ [Hub] Ready. Waiting for key input...")
-
 --// ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ScriptHub"
+ScreenGui.Name = "SigmaZHub"
 ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
---// Key Frame (shows first)
+--// Key Frame
 local KeyFrame = Instance.new("Frame")
-KeyFrame.Size = UDim2.new(0, 300, 0, 150)
-KeyFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
-KeyFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+KeyFrame.Size = UDim2.new(0, 320, 0, 180)
+KeyFrame.Position = UDim2.new(0.5, -160, 0.5, -90)
+KeyFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
 KeyFrame.BorderSizePixel = 0
 KeyFrame.Active = true
 KeyFrame.Draggable = true
@@ -39,18 +32,18 @@ KeyFrame.Parent = ScreenGui
 Instance.new("UICorner", KeyFrame)
 
 local KeyTitle = Instance.new("TextLabel")
-KeyTitle.Size = UDim2.new(1, 0, 0, 40)
-KeyTitle.BackgroundColor3 = Color3.fromRGB(45, 45, 90)
+KeyTitle.Size = UDim2.new(1, 0, 0, 50)
+KeyTitle.BackgroundColor3 = Color3.fromRGB(55, 55, 120)
 KeyTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-KeyTitle.Text = "🔑 Enter Access Key"
+KeyTitle.Text = "🔑 SigmaZ Hub Access"
 KeyTitle.Font = Enum.Font.GothamBold
-KeyTitle.TextSize = 20
+KeyTitle.TextSize = 22
 KeyTitle.Parent = KeyFrame
 Instance.new("UICorner", KeyTitle)
 
 local KeyBox = Instance.new("TextBox")
-KeyBox.Size = UDim2.new(1, -20, 0, 40)
-KeyBox.Position = UDim2.new(0, 10, 0, 50)
+KeyBox.Size = UDim2.new(1, -40, 0, 45)
+KeyBox.Position = UDim2.new(0, 20, 0, 60)
 KeyBox.PlaceholderText = "Enter Key..."
 KeyBox.Text = ""
 KeyBox.Font = Enum.Font.Gotham
@@ -61,21 +54,21 @@ KeyBox.Parent = KeyFrame
 Instance.new("UICorner", KeyBox)
 
 local SubmitBtn = Instance.new("TextButton")
-SubmitBtn.Size = UDim2.new(1, -20, 0, 40)
-SubmitBtn.Position = UDim2.new(0, 10, 0, 100)
-SubmitBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 120)
-SubmitBtn.Text = "Unlock Hub"
+SubmitBtn.Size = UDim2.new(1, -40, 0, 45)
+SubmitBtn.Position = UDim2.new(0, 20, 0, 115)
+SubmitBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 150)
+SubmitBtn.Text = "Unlock SigmaZ Hub"
 SubmitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 SubmitBtn.Font = Enum.Font.GothamBold
 SubmitBtn.TextSize = 18
 SubmitBtn.Parent = KeyFrame
 Instance.new("UICorner", SubmitBtn)
 
---// Main Hub (hidden until key works)
+--// Main Hub
 local HubFrame = Instance.new("Frame")
-HubFrame.Size = UDim2.new(0, 350, 0, 350)
+HubFrame.Size = UDim2.new(0, 500, 0, 400)
 HubFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
-HubFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+HubFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
 HubFrame.BorderSizePixel = 0
 HubFrame.Active = true
 HubFrame.Draggable = true
@@ -83,33 +76,22 @@ HubFrame.Visible = false
 HubFrame.Parent = ScreenGui
 Instance.new("UICorner", HubFrame)
 
--- Drop Shadow
-local Shadow = Instance.new("ImageLabel")
-Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
-Shadow.Position = UDim2.new(0.5, 0, 0.5, 5)
-Shadow.Size = UDim2.new(1, 40, 1, 40)
-Shadow.BackgroundTransparency = 1
-Shadow.Image = "rbxassetid://1316045217"
-Shadow.ImageTransparency = 0.5
-Shadow.ZIndex = 0
-Shadow.Parent = HubFrame
-
 -- Title Bar
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, -35, 0, 35)
-Title.BackgroundColor3 = Color3.fromRGB(45, 45, 90)
+Title.Size = UDim2.new(1, -45, 0, 40)
+Title.BackgroundColor3 = Color3.fromRGB(55, 55, 120)
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Text = "✨ SIGMAZ Hub ✨"
+Title.Text = "✨ SigmaZ Hub ✨"
 Title.Font = Enum.Font.GothamBold
-Title.TextSize = 20
+Title.TextSize = 22
 Title.Parent = HubFrame
 Instance.new("UICorner", Title)
 
 -- Minimize Button
 local MinBtn = Instance.new("TextButton")
-MinBtn.Size = UDim2.new(0, 35, 0, 35)
-MinBtn.Position = UDim2.new(1, -35, 0, 0)
-MinBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 120)
+MinBtn.Size = UDim2.new(0, 40, 0, 40)
+MinBtn.Position = UDim2.new(1, -40, 0, 0)
+MinBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 150)
 MinBtn.Text = "-"
 MinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 MinBtn.Font = Enum.Font.GothamBold
@@ -117,96 +99,118 @@ MinBtn.TextSize = 20
 MinBtn.Parent = HubFrame
 Instance.new("UICorner", MinBtn)
 
--- Content Frame
+-- Sidebar
+local Sidebar = Instance.new("Frame")
+Sidebar.Size = UDim2.new(0, 150, 1, -40)
+Sidebar.Position = UDim2.new(0, 0, 0, 40)
+Sidebar.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+Sidebar.Parent = HubFrame
+Instance.new("UICorner", Sidebar)
+
+local SidebarTitle = Instance.new("TextLabel")
+SidebarTitle.Size = UDim2.new(1, 0, 0, 30)
+SidebarTitle.Position = UDim2.new(0, 0, 0, 0)
+SidebarTitle.BackgroundTransparency = 0.3
+SidebarTitle.Text = "📜 Scripts"
+SidebarTitle.TextColor3 = Color3.fromRGB(255,255,255)
+SidebarTitle.Font = Enum.Font.GothamBold
+SidebarTitle.TextSize = 18
+SidebarTitle.Parent = Sidebar
+
+-- Script Buttons in Sidebar
+local yPos = 35
+for i, scriptData in ipairs(WorkingScript) do
+	local Btn = Instance.new("TextButton")
+	Btn.Size = UDim2.new(1, -10, 0, 35)
+	Btn.Position = UDim2.new(0, 5, 0, yPos)
+	Btn.BackgroundColor3 = Color3.fromRGB(75, 75, 140)
+	Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Btn.Text = "▶ " .. scriptData.Name
+	Btn.Font = Enum.Font.GothamBold
+	Btn.TextSize = 16
+	Btn.Parent = Sidebar
+	Instance.new("UICorner", Btn)
+
+	Btn.MouseEnter:Connect(function()
+		TweenService:Create(Btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(100,100,180)}):Play()
+	end)
+	Btn.MouseLeave:Connect(function()
+		TweenService:Create(Btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(75,75,140)}):Play()
+	end)
+
+	Btn.MouseButton1Click:Connect(function()
+		print("⚡ [SigmaZ Hub] Loading " .. scriptData.Name)
+		local success, result = pcall(function()
+			return loadstring(game:HttpGet(scriptData.Url))()
+		end)
+		if success then
+			print("✅ Loaded " .. scriptData.Name)
+		else
+			warn("❌ Failed: " .. tostring(result))
+		end
+	end)
+	yPos = yPos + 45
+end
+
+-- Content Frame (live stats & info)
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, 0, 1, -35)
-Content.Position = UDim2.new(0, 0, 0, 35)
-Content.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Content.Size = UDim2.new(1, -150, 1, -40)
+Content.Position = UDim2.new(0, 150, 0, 40)
+Content.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
 Content.Parent = HubFrame
 Instance.new("UICorner", Content)
 
--- Game Info
-local gameInfo = string.format("🎮 %s\n📌 Place Id: %s\n📝 Version: %s\n🆔 Job Id: %s",
-	MarketplaceService:GetProductInfo(game.PlaceId).Name,
-	game.PlaceId,
-	game.PlaceVersion,
-	game.JobId
-)
-
 local InfoLabel = Instance.new("TextLabel")
-InfoLabel.Size = UDim2.new(1, -20, 0, 80)
-InfoLabel.Position = UDim2.new(0, 10, 0, 5)
+InfoLabel.Size = UDim2.new(1, -20, 1, -20)
+InfoLabel.Position = UDim2.new(0, 10, 0, 10)
 InfoLabel.BackgroundTransparency = 1
-InfoLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+InfoLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 InfoLabel.TextXAlignment = Enum.TextXAlignment.Left
 InfoLabel.TextYAlignment = Enum.TextYAlignment.Top
 InfoLabel.TextWrapped = true
 InfoLabel.Font = Enum.Font.Gotham
 InfoLabel.TextSize = 16
-InfoLabel.Text = gameInfo
+InfoLabel.Text = ""
 InfoLabel.Parent = Content
 
--- Script Buttons
-local yPos = 95
-for i, scriptData in ipairs(WorkingScript) do
-	local Btn = Instance.new("TextButton")
-	Btn.Size = UDim2.new(1, -20, 0, 35)
-	Btn.Position = UDim2.new(0, 10, 0, yPos)
-	Btn.BackgroundColor3 = Color3.fromRGB(60, 60, 100)
-	Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Btn.Text = "▶ " .. scriptData.Name
-	Btn.Font = Enum.Font.GothamBold
-	Btn.TextSize = 18
-	Btn.Parent = Content
-	Instance.new("UICorner", Btn)
+-- Live Stats Update
+RunService.RenderStepped:Connect(function()
+	InfoLabel.Text = string.format(
+	"🎮 Game: %s\n📌 Place ID: %s\n📝 Version: %s\n🆔 Job ID: %s\n👥 Players: %d",
+	MarketplaceService:GetProductInfo(game.PlaceId).Name,
+	game.PlaceId,
+	game.PlaceVersion,
+	game.JobId,
+	#Players:GetPlayers()
+	)
+end)
 
-	-- Hover effect
-	Btn.MouseEnter:Connect(function()
-		Btn.BackgroundColor3 = Color3.fromRGB(80, 80, 140)
-	end)
-	Btn.MouseLeave:Connect(function()
-		Btn.BackgroundColor3 = Color3.fromRGB(60, 60, 100)
-	end)
-
-	Btn.MouseButton1Click:Connect(function()
-		print("⚡ Loading " .. scriptData.Name)
-		local success, result = pcall(function()
-			return loadstring(game:HttpGet(scriptData.Url))()
-		end)
-		if not success then
-			warn("❌ Failed to load " .. scriptData.Name .. ": " .. tostring(result))
-		else
-			print("✅ Successfully loaded " .. scriptData.Name)
-		end
-	end)
-
-	yPos = yPos + 45
-end
-
--- Minimize Functionality
+-- Minimize Function
 local minimized = false
 MinBtn.MouseButton1Click:Connect(function()
 	minimized = not minimized
 	if minimized then
+		Sidebar.Visible = false
 		Content.Visible = false
-		HubFrame.Size = UDim2.new(0, 350, 0, 35)
+		HubFrame.Size = UDim2.new(0, 500, 0, 40)
 		MinBtn.Text = "+"
 	else
+		Sidebar.Visible = true
 		Content.Visible = true
-		HubFrame.Size = UDim2.new(0, 350, 0, 350)
+		HubFrame.Size = UDim2.new(0, 500, 0, 400)
 		MinBtn.Text = "-"
 	end
 end)
 
---// Key Validation
+-- Key Validation
 SubmitBtn.MouseButton1Click:Connect(function()
 	if KeyBox.Text == KEY_REQUIRED then
-		print("🔓 [Hub] Key accepted. Hub unlocked.")
 		KeyFrame:Destroy()
 		HubFrame.Visible = true
 	else
-		print("❌ [Hub] Wrong key entered.")
 		KeyBox.Text = ""
-		KeyBox.PlaceholderText = "❌ Invalid Key, Try Again"
+		KeyBox.PlaceholderText = "❌ Invalid Key"
+		local shake = TweenService:Create(KeyFrame, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 3), {Position = KeyFrame.Position + UDim2.new(0,5,0,0)})
+		shake:Play()
 	end
 end)
