@@ -5,11 +5,12 @@ local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
 
 --// CONFIG
-local KEY_REQUIRED = "PHM-12345" -- change this to your key
+local KEY_REQUIRED = "KEY-12345" -- change this to your key
 local WorkingScript = {
 	{ Name = "Inf Yield", Url = "https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/scriptfile1" },
 	{ Name = "99 Nights", Url = "https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/99nights" },
 	{ Name = "ESP", Url = "https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP" }
+	{ Name = "Steal A Brainrot", Url = "https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua" },
 }
 
 local player = Players.LocalPlayer
