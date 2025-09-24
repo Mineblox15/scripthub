@@ -1,0 +1,106 @@
+--// ✨ SigmaZ Hub fully RayField ✨
+
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/loader"))()
+
+local KEY_REQUIRED = "PHM-12345"
+local WorkingScript = {
+	{ Name = "Inf Yield", Url = "https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/scriptfile1" },
+	{ Name = "99 Nights", Url = "https://raw.githubusercontent.com/Mineblox15/scripthub/refs/heads/main/99nights" },
+	{ Name = "ESP", Url = "https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP" }
+}
+
+local Players = game:GetService("Players")
+local MarketplaceService = game:GetService("MarketplaceService")
+
+-- Create Window
+local Window = Rayfield:CreateWindow({
+	Name = "✨ SigmaZ Hub ✨",
+	LoadingTitle = "SigmaZ Hub",
+	LoadingSubtitle = "Initializing...",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = "SigmaZHub",
+		FileName = "Config"
+	},
+	KeySystem = true,
+	DevConsole = true,
+})
+
+-- Key System
+Window:SetKeySystem({
+	Key = KEY_REQUIRED,
+	Title = "SigmaZ Hub Key System",
+	Subtitle = "Enter your key to unlock",
+	Note = "Your key is required to unlock the hub",
+})
+
+-- Scripts Tab
+local ScriptsTab = Window:CreateTab("Scripts", 4483362458)
+local ScriptsSection = ScriptsTab:CreateSection("Available Scripts")
+
+-- Game Info Label
+local function updateGameInfo()
+	return string.format(
+		"🎮 %s\n📌 Place ID: %s\n📝 Version: %s\n🆔 Job ID: %s\n👥 Players: %d",
+		MarketplaceService:GetProductInfo(game.PlaceId).Name,
+		game.PlaceId,
+		game.PlaceVersion,
+		game.JobId,
+		#Players:GetPlayers()
+	)
+end
+
+ScriptsSection:CreateLabel({
+	Name = "Game Info",
+	Text = updateGameInfo()
+})
+
+-- Auto-update game info every second
+spawn(function()
+	while true do
+		wait(1)
+		ScriptsSection:UpdateLabel("Game Info", updateGameInfo())
+	end
+end)
+
+-- Add Script Buttons dynamically
+for _, scriptData in ipairs(WorkingScript) do
+	ScriptsSection:CreateButton({
+		Name = scriptData.Name,
+		Callback = function()
+			local success, err = pcall(function()
+				loadstring(game:HttpGet(scriptData.Url))()
+			end)
+			if success then
+				Rayfield:Notify({
+					Title = "SigmaZ Hub",
+					Content = scriptData.Name.." Loaded!",
+					Duration = 3,
+					Image = 4483362458
+				})
+			else
+				warn("❌ Failed to load "..scriptData.Name..": "..tostring(err))
+			end
+		end
+	})
+end
+
+-- Settings Tab (keeping it for hub options)
+local SettingsTab = Window:CreateTab("Settings", 4483362458)
+local SettingsSection = SettingsTab:CreateSection("Hub Settings")
+
+-- Example: Auto-minimize toggle (replicates old minimize behavior)
+local minimized = false
+SettingsSection:CreateToggle({
+	Name = "Minimize Hub",
+	CurrentValue = false,
+	Flag = "MinimizeHub",
+	Callback = function(value)
+		minimized = value
+		if minimized then
+			Window:Hide()
+		else
+			Window:Show()
+		end
+	end
+})
